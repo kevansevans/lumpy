@@ -39,14 +39,12 @@ class ZProject
 		root = new Directory("WAD");
 		
 		gameinfo = new GameInfo();
-		root.lumps.push(gameinfo);
-		
-		var dir = new Directory("ZSCRIPT");
-		root.lumps.push(dir);
 	}
 	
 	public function saveProject()
 	{
+		root.lumps.push(gameinfo);
+		
 		var data:Any = root.toObject();
 		
 		filemanager.saveProject(data);
@@ -87,11 +85,11 @@ class ZProject
 		}
 	}
 	
-	//move me to file manager!!!
-	
 	public function init()
 	{
 		Main.FileTreeObj.create(root);
+		
+		Main.FileEditorObj.manualTabAddition(gameinfo);
 		
 		var tree = Main.FileTreeObj.tree;
 		

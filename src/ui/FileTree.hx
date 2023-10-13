@@ -21,12 +21,8 @@ class FileTree extends ZD_UI
 	{
 		super();
 		
-		if (tree == null)
-		{
-			tree = new TreeView();
-			tree.y = 45;
-			Toolkit.screen.addComponent(tree);
-		}
+		tree = new TreeView();
+		tree.y = 45;
 	}
 	
 	public function create(_lump:Directory = null)
@@ -52,12 +48,10 @@ class FileTree extends ZD_UI
 		}
 	}
 	
-	override public function resize(_engine:Engine) 
+	override public function resize(_width:Int, _height:Int) 
 	{
-		super.resize(_engine);
-		
 		tree.y = 45;
 		tree.width = 300;
-		tree.height = _engine.height - 50;
+		tree.height = _height - 50;
 	}
 }

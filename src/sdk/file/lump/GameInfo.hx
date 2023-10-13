@@ -6,10 +6,15 @@ import haxe.ui.components.CheckBox;
 import haxe.ui.components.ColorPicker;
 import haxe.ui.components.DropDown;
 import haxe.ui.components.Label;
+import haxe.ui.components.TextArea;
 import haxe.ui.components.TextField;
 import haxe.ui.containers.Box;
 import haxe.ui.containers.HBox;
+import haxe.ui.containers.HorizontalSplitter;
+import haxe.ui.containers.ScrollView;
+import haxe.ui.containers.Splitter;
 import haxe.ui.containers.VBox;
+import haxe.ui.containers.VerticalSplitter;
 import haxe.ui.data.DataSource;
 import haxe.ui.events.MouseEvent;
 import haxe.ui.events.UIEvent;
@@ -49,6 +54,8 @@ class GameInfo extends LumpBase
 		
 		load = new Array();
 	}
+	
+	var split:HorizontalSplitter;
 	
 	override public function toString():String 
 	{
@@ -96,8 +103,11 @@ class GameInfo extends LumpBase
 		var container = new Box();
 		container.text = "Gameinfo";
 		
-		var aligner:VBox = new VBox();
-		container.addComponent(aligner);
+		split = new HorizontalSplitter();
+		container.addComponent(split);
+		
+		var aligner:ScrollView = new ScrollView();
+		split.addComponent(aligner);
 		
 		var iwad_box:HBox = new HBox();
 		var iwad_label:Label = new Label();
@@ -268,6 +278,12 @@ class GameInfo extends LumpBase
 		}
 		
 		aligner.addComponent(wikibutton);
+		
+		var previewScroll:ScrollView = new ScrollView();
+		split.addComponent(previewScroll);
+		
+		var preview:TextArea = new TextArea();
+		previewScroll.addComponent(preview);
 		
 		return container;
 	}

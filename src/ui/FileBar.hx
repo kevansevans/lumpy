@@ -87,10 +87,8 @@ class FileBar extends ZD_UI
 		Toolkit.screen.addComponent(bar);
 	}
 	
-	override public function resize(_engine:Engine) 
+	override public function resize(_width:Int, _height:Int) 
 	{
-		super.resize(_engine);
-		
-		bar.width = _engine.width;
+		bar.width = _width;
 	}
 }

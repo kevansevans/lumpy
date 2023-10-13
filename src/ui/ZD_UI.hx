@@ -13,7 +13,7 @@ class ZD_UI
 		
 	}
 	
-	public function resize(_engine:Engine)
+	public function resize(_width:Int, _height:Int)
 	{
 		
 	}

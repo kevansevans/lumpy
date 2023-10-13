@@ -4,6 +4,8 @@ import h3d.Engine;
 import haxe.ui.containers.TabView;
 import haxe.ui.Toolkit;
 import haxe.ui.containers.Box;
+import haxe.ui.events.UIEvent;
+import sdk.file.lump.LumpBase;
 
 /**
  * ...
@@ -19,20 +21,21 @@ class FileEditor extends ZD_UI
 		super();
 		
 		tabview = new TabView();
-		Toolkit.screen.addComponent(tabview);
 		
 		var welcomebox:Box = new Box();
 		welcomebox.text = "Welcome!";
 		tabview.addComponent(welcomebox);
 	}
 	
-	override public function resize(_engine:Engine) 
+	public function manualTabAddition(_lump:LumpBase)
 	{
-		super.resize(_engine);
-		
+		tabview.addComponent(_lump.getUIBox());
+	}
+	
+	override public function resize(_width:Int, _height:Int) 
+	{
 		tabview.x = 305;
 		tabview.y = 45;
-		tabview.width = _engine.width - 310;
-		tabview.height = _engine.height - 50;
+		tabview.resizeComponent(_width - 310, _height - 50);
 	}
 }
