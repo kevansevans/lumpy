@@ -54,7 +54,12 @@ class ZProject
 	{
 		var path = filemanager.newBuildFolder();
 		
-		exportLumpBytes(root, path);
+		var proj:Directory = new Directory("root");
+		proj.lumps = root.lumps.copy();
+		
+		proj.lumps.push(gameinfo);
+		
+		exportLumpBytes(proj, path);
 		
 		filemanager.zipLumps(path);
 		

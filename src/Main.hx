@@ -1,10 +1,6 @@
 package;
 
-import haxe.ui.backend.ToolkitOptions;
 import haxe.ui.containers.HorizontalSplitter;
-import haxe.ui.containers.menus.Menu;
-import haxe.ui.containers.menus.MenuBar;
-import haxe.ui.containers.menus.MenuItem;
 import hxd.App;
 import hxd.Res;
 import ui.FileBar;
@@ -60,16 +56,17 @@ class Main extends App
 		
 		Toolkit.screen.root = s2d;
 		split = new HorizontalSplitter();
-		split.verticalAlign = "Center";
 		Toolkit.screen.addComponent(split);
 		
 		FileBarObj = new FileBar();
 		
 		FileTreeObj = new FileTree();
 		split.addComponent(FileTreeObj.tree);
+		FileTreeObj.tree.percentWidth = 10;
 		
 		FileEditorObj = new FileEditor();
 		split.addComponent(FileEditorObj.tabview);
+		FileEditorObj.tabview.percentWidth = 80;
 		
 		onResize();
 		
@@ -87,16 +84,10 @@ class Main extends App
 	override function onResize()
 	{
 		super.onResize();
-		
-		trace(engine.width);
-		
+
 		split.x = 5;
 		split.y = 45;
-		split.width = engine.width - 10;
-		split.height = engine.height - 50;
-		
-		FileBarObj.resize(engine.width, 40);
-		FileTreeObj.tree.height = engine.height - 50;
-		FileEditorObj.tabview.height = engine.height - 50;
+		split.percentWidth = 100;
+		split.percentHeight = 100 - (100 * (45 / engine.height));
 	}
 }

@@ -25,6 +25,9 @@ class FileEditor extends ZD_UI
 		var welcomebox:Box = new Box();
 		welcomebox.text = "Welcome!";
 		tabview.addComponent(welcomebox);
+		
+		tabview.percentWidth = 100;
+		tabview.percentHeight = 100;
 	}
 	
 	public function manualTabAddition(_lump:LumpBase)
@@ -36,6 +39,5 @@ class FileEditor extends ZD_UI
 	{
 		tabview.x = 305;
 		tabview.y = 45;
-		tabview.resizeComponent(_width - 310, _height - 50);
 	}
 }

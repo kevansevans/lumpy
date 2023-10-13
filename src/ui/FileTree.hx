@@ -22,7 +22,8 @@ class FileTree extends ZD_UI
 		super();
 		
 		tree = new TreeView();
-		tree.y = 45;
+		tree.percentWidth = 100;
+		tree.percentHeight = 100;
 	}
 	
 	public function create(_lump:Directory = null)

@@ -102,9 +102,13 @@ class GameInfo extends LumpBase
 	{
 		var container = new Box();
 		container.text = "Gameinfo";
+		container.percentWidth = 100;
+		container.percentHeight = 100;
 		
 		split = new HorizontalSplitter();
 		container.addComponent(split);
+		split.percentWidth = 100;
+		split.percentHeight = 100;
 		
 		var aligner:ScrollView = new ScrollView();
 		split.addComponent(aligner);
@@ -284,6 +288,7 @@ class GameInfo extends LumpBase
 		
 		var preview:TextArea = new TextArea();
 		previewScroll.addComponent(preview);
+		preview.width = 500;
 		
 		return container;
 	}

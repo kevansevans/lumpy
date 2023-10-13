@@ -35,6 +35,7 @@ class FileBar extends ZD_UI
 		super();
 		
 		bar = new MenuBar();
+		bar.percentWidth = 100;
 		
 		m_File = new Menu();
 		m_File.text = "File";
