@@ -80,8 +80,7 @@ class Main extends App
 	{
 		super.update(dt);
 		
-		Main.w_width = engine.width;
-		Main.w_height = engine.height;
+		onResize();
 	}
 	
 	override function onResize()

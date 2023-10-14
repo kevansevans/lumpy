@@ -24,7 +24,6 @@ import haxe.Json;
 import haxe.io.Bytes;
 
 import haxe.zip.Entry;
-import haxe.crypto.Crc32;
 import haxe.zip.Writer;
 
 /**
@@ -160,19 +159,19 @@ class FileManager
 	function buildZip(_dir:Directory, _entries:List<Entry> = null, _inDir:Null<String> = null)
 	{
 		if (_entries == null) _entries = new List();
-		if (_inDir == null) _inDir = 'proj/';
+		if (_inDir == null) _inDir = '';
 		
 		for (lump in _dir.lumps)
 		{
-			var path = _inDir + '/' + lump.name;
 			if (lump.type == Lump.E_Directory)
 			{
-				buildZip(cast lump, _entries, path);
+				var path = _inDir + lump.name;
+				buildZip(cast lump, _entries, path + '/');
 				continue;
 			}
 			
 			var bytes:Bytes = lump.toLumpFile();
-			var filename = _inDir + '/' + lump.name.toUpperCase() + '.' + lump.ext;
+			var filename = _inDir + lump.name.toUpperCase() + '.' + lump.ext;
 			var entry:Entry =
 			{
 				fileName : filename,
@@ -181,7 +180,7 @@ class FileManager
 				compressed : false,
 				dataSize : bytes.length,
 				data : bytes,
-				crc32 : Crc32.make(bytes)
+				crc32 : null
 			};
 			
 			_entries.push(entry);
