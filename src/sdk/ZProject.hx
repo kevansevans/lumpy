@@ -1,15 +1,9 @@
 package sdk;
 
-import haxe.crypto.Crc32;
-import haxe.io.Path;
 import haxe.ui.events.MouseEvent;
-import haxe.zip.Entry;
-import haxe.zip.Writer;
 import hxd.System;
 import sdk.file.FileManager;
 import sdk.data.ProjectConfig;
-import sys.FileSystem;
-import sys.io.File;
 
 import sdk.file.lump.*;
 import sdk.data.lumps.*;
@@ -59,6 +53,7 @@ class ZProject
 		
 		proj.lumps.push(gameinfo);
 		
+		#if sys
 		exportLumpBytes(proj, path);
 		
 		filemanager.zipLumps(path);
@@ -67,8 +62,13 @@ class ZProject
 		{
 			System.openURL('./builds/MyCoolWad.pk3');
 		}
+		
+		#elseif js
+		filemanager.zipLumps(proj);
+		#end
 	}
 	
+	#if sys
 	function exportLumpBytes(_folder:Directory, _path:String)
 	{
 		for (lump in _folder.lumps)
@@ -89,6 +89,7 @@ class ZProject
 			}
 		}
 	}
+	#end
 	
 	public function init()
 	{

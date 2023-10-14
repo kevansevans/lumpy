@@ -69,6 +69,7 @@ class FileBar extends ZD_UI
 		
 		m_File.addComponent(new MenuSeparator());
 		
+		#if sys
 		mi_Export = new Button();
 		mi_Export.text = "Build";
 		bar.addComponent(mi_Export);
@@ -76,9 +77,14 @@ class FileBar extends ZD_UI
 		{
 			Main.project.buildProject();
 		}
+		#end
 		
 		mi_Deploy = new Button();
+		#if sys
 		mi_Deploy.text = "Run";
+		#elseif js
+		mi_Deploy.text = "Download";
+		#end
 		bar.addComponent(mi_Deploy);
 		mi_Deploy.onClick = function(_event:UIEvent)
 		{

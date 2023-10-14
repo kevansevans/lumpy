@@ -1,6 +1,7 @@
 package;
 
 import haxe.ui.containers.HorizontalSplitter;
+import haxe.ui.events.UIEvent;
 import hxd.App;
 import hxd.Res;
 import ui.FileBar;
@@ -52,10 +53,12 @@ class Main extends App
 	{
 		super.init();
 		
-		Res.initLocal();
-		
 		Toolkit.screen.root = s2d;
 		split = new HorizontalSplitter();
+		split.onClick = function(_event:UIEvent)
+		{
+			onResize();
+		}
 		Toolkit.screen.addComponent(split);
 		
 		FileBarObj = new FileBar();
@@ -84,7 +87,7 @@ class Main extends App
 	override function onResize()
 	{
 		super.onResize();
-
+		
 		split.x = 5;
 		split.y = 45;
 		split.percentWidth = 100;

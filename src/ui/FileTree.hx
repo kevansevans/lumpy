@@ -7,8 +7,6 @@ import haxe.ui.containers.TreeViewNode;
 import haxe.ui.events.MouseEvent;
 import sdk.file.lump.Directory;
 
-import sys.FileSystem;
-
 /**
  * ...
  * @author Kaelan

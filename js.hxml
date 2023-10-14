@@ -1,0 +1,8 @@
+-cp src
+-dce full
+-main Main
+
+-lib heaps
+-lib haxeui-core
+-lib haxeui-heaps
+-js bin/js/lumpy.js

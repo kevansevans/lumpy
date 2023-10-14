@@ -283,12 +283,8 @@ class GameInfo extends LumpBase
 		
 		aligner.addComponent(wikibutton);
 		
-		var previewScroll:ScrollView = new ScrollView();
-		split.addComponent(previewScroll);
-		
-		var preview:TextArea = new TextArea();
-		previewScroll.addComponent(preview);
-		preview.width = 500;
+		//var previewScroll:ScrollView = new ScrollView();
+		//split.addComponent(previewScroll);
 		
 		return container;
 	}
