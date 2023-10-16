@@ -109,14 +109,14 @@ class FileManager
 		return Bytes.ofData(File.getBytes(_path).getData());
 	}
 	
-	function buildZip(_path:String, _entries:List<Entry> = null, _inDir:Null<String> = null)
+	function buildZip(_path:String, _entries:List<Entry> = null, _inDir:Null<Int> = null)
 	{
 		if (_entries == null) _entries = new List();
-		if (_inDir == null) _inDir = _path;
+		if (_inDir == null) _inDir = _path.length;
 		
 		for (file in getItems(_path))
 		{
-			var path = _path + '/$file';
+			var path = haxe.io.Path.join([_path, file]);
 			if (isFolder(path))
 			{
 				buildZip(path, _entries, _inDir);
@@ -124,10 +124,11 @@ class FileManager
 			}
 			
 			var bytes = getFileBytes(path);
+			var filename = path.substring(_inDir - 2); //Path.join doesn't return the expected string, so this needs to be adjusted by 2
 			
 			var entry:Entry =
 			{
-				fileName : StringTools.replace(path, _inDir, ""),
+				fileName : filename,
 				fileSize : bytes.length,
 				fileTime : Date.now(),
 				compressed : false,
