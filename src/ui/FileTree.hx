@@ -6,6 +6,7 @@ import haxe.ui.Toolkit;
 import haxe.ui.containers.TreeViewNode;
 import haxe.ui.events.MouseEvent;
 import sdk.file.lump.Directory;
+import sdk.enums.Lump;
 
 /**
  * ...
@@ -37,8 +38,7 @@ class FileTree extends ZD_UI
 		for (lump in _dir.lumps)
 		{
 			var node = _node.addNode({text : lump.name, lump : lump});
-			var object:Dynamic = lump.object;
-			if (object.type == "Directory")
+			if (lump.type == Lump.E_Directory)
 			{
 				buildTree(cast lump, node);
 			}

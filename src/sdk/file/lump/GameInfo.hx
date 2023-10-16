@@ -29,6 +29,8 @@ import sdk.enums.Lump;
  */
 class GameInfo extends LumpBase
 {
+	var g_info:T_GameInfo;
+	
 	public function new() 
 	{
 		super();
@@ -38,12 +40,17 @@ class GameInfo extends LumpBase
 		wikipage = "https://zdoom.org/wiki/GAMEINFO";
 		ext = 'txt';
 		
-		var ginfo:T_GameInfo =
+		g_info =
 		{
 			include : true
 		};
-		object = ginfo;
-		ZProject.config.gameinfo = ginfo;
+		
+		ZProject.config.gameinfo = object;
+	}
+	
+	override function get_object():Dynamic 
+	{
+		return g_info;
 	}
 	
 	var split:HorizontalSplitter;
@@ -58,6 +65,7 @@ class GameInfo extends LumpBase
 		var data:String = '';
 		
 		if (object.iwad != null) data += 'IWAD = "' + object.iwad + '"\n';
+		//if 
 		
 		return Bytes.ofString(data);
 	}
@@ -77,7 +85,7 @@ class GameInfo extends LumpBase
 		var iwad_grid:Grid = new Grid();
 		iwad_grid.verticalAlign = "center";
 		iwad_grid.columns = 2;
-		iwad_grid.width = 390;
+		iwad_grid.width = 380;
 		var iwad_check:CheckBox = new CheckBox();
 		iwad_check.percentWidth = 50;
 		iwad_check.text = "IWAD";
@@ -88,20 +96,32 @@ class GameInfo extends LumpBase
 		{
 			if (iwad_check.value == false || iwad_input.value == "")
 			{
-				object.iwad = null;
+				g_info.iwad = null;
 				return;
 			}
 			
-			object.iwad = iwad_input.value;
+			g_info.iwad = iwad_input.value;
 		}
 		scroll.addComponent(iwad_grid);
 		
 		var title_grid:Grid = new Grid();
-		title_grid.width = 390;
+		title_grid.width = 380;
 		var title_check:CheckBox = new CheckBox();
 		title_check.percentWidth = 50;
 		title_check.text = "Startup Title";
 		title_grid.addComponent(title_check);
+		var title_input:TextField = new TextField();
+		title_grid.addComponent(title_input);
+		title_input.onChange = title_check.onChange = function(_event:UIEvent)
+		{
+			if (title_check.value == false || title_input.value == "")
+			{
+				g_info.startupTitle = null;
+				return;
+			}
+			
+			g_info.startupTitle = title_input.value;
+		}
 		
 		scroll.addComponent(title_grid);
 		

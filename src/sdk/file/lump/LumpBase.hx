@@ -15,7 +15,7 @@ import sdk.enums.Lump;
 class LumpBase 
 {
 	public var type:Lump;
-	public var object:Dynamic;
+	public var object(get, null):Dynamic;
 	
 	public var name:String;
 	public var isOpen:Bool;
@@ -53,6 +53,11 @@ class LumpBase
 	public function setData(_input:Any)
 	{
 		trace("Null setData here!");
+	}
+	
+	function get_object():Dynamic 
+	{
+		return {};
 	}
 	
 	public function getUIBox():Box
