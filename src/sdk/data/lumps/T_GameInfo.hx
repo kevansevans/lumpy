@@ -5,8 +5,6 @@ package sdk.data.lumps;
  */
 typedef T_GameInfo = T_LumpBase &
 {
-	var ?name:String;
-	
 	var ?iwad:String;
 	var ?load:Array<String>;
 	var ?noSpriteRename:Bool;

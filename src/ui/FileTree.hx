@@ -37,7 +37,7 @@ class FileTree extends ZD_UI
 		for (lump in _dir.lumps)
 		{
 			var node = _node.addNode({text : lump.name, lump : lump});
-			var object:Dynamic = lump.toObject();
+			var object:Dynamic = lump.object;
 			if (object.type == "Directory")
 			{
 				buildTree(cast lump, node);

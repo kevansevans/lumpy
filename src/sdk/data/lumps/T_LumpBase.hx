@@ -5,6 +5,5 @@ package sdk.data.lumps;
  */
 typedef T_LumpBase =
 {
-	var name:String;	
-	var type:String;
+	var include:Bool;
 }

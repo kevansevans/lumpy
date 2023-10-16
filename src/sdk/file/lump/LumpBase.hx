@@ -15,6 +15,7 @@ import sdk.enums.Lump;
 class LumpBase 
 {
 	public var type:Lump;
+	public var object:Dynamic;
 	
 	public var name:String;
 	public var isOpen:Bool;
@@ -36,11 +37,6 @@ class LumpBase
 		{
 			System.openURL(wikipage);
 		}
-	}
-	
-	public function toObject():Any
-	{
-		return {};
 	}
 	
 	public function toString():String

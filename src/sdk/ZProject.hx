@@ -16,7 +16,7 @@ import sdk.enums.Lump;
  */
 class ZProject 
 {
-	public static var config:ProjectConfig;
+	public static var config:Dynamic;
 	
 	public var gameinfo:GameInfo;
 	public var root:Directory;
@@ -28,33 +28,27 @@ class ZProject
 	
 	public function new() 
 	{
+		config = {};
+		
 		filemanager = new FileManager();
 		
 		root = new Directory("WAD");
 		
 		gameinfo = new GameInfo();
+		root.lumps.push(gameinfo);
 	}
 	
 	public function saveProject()
 	{
-		root.lumps.push(gameinfo);
-		
-		var data:Any = root.toObject();
-		
-		filemanager.saveProject(data);
+		filemanager.saveProject();
 	}
 	
 	public function buildProject(_launch:Bool = false)
 	{
+		#if sys
 		var path = filemanager.newBuildFolder();
 		
-		var proj:Directory = new Directory("root");
-		proj.lumps = root.lumps.copy();
-		
-		proj.lumps.push(gameinfo);
-		
-		#if sys
-		exportLumpBytes(proj, path);
+		exportLumpBytes(root, path);
 		
 		filemanager.zipLumps(path);
 		
@@ -64,7 +58,7 @@ class ZProject
 		}
 		
 		#elseif js
-		filemanager.zipLumps(proj);
+		filemanager.zipLumps(root);
 		#end
 	}
 	
@@ -95,9 +89,8 @@ class ZProject
 	{
 		Main.FileTreeObj.create(root);
 		
-		Main.FileEditorObj.manualTabAddition(gameinfo);
-		
 		var tree = Main.FileTreeObj.tree;
+		var editor = Main.FileEditorObj.tabview;
 		
 		tree.onClick = function(_event:MouseEvent)
 		{
@@ -111,7 +104,7 @@ class ZProject
 			lump = cast activedata.lump;
 			
 			if (lump.isOpen) {
-				Main.FileEditorObj.tabview.selectedPage = lump.uiComponent;
+				editor.selectedPage = lump.uiComponent;
 				return;
 			}
 			
@@ -120,8 +113,8 @@ class ZProject
 			
 			lump.uiComponent = boxobject;
 			
-			Main.FileEditorObj.tabview.addComponent(boxobject);
-			Main.FileEditorObj.tabview.selectedPage = boxobject;
+			editor.addComponent(boxobject);
+			editor.selectedPage = boxobject;
 		}
 	}
 }

@@ -41,9 +41,9 @@ class FileManager
 		#end
 	}
 	
-	public function saveProject(_data:T_Directory)
+	public function saveProject()
 	{
-		var data = Json.stringify(_data, '\t');
+		var data = Json.stringify(ZProject.config, '\t');
 		
 		var projname = './projtemp/projtemp.json';
 		

@@ -51,27 +51,6 @@ class Directory extends LumpBase
 		return container;
 	}
 	
-	override public function toObject():Any
-	{
-		var data:T_Directory = 
-		{
-			type : "Directory",
-			name : this.name
-		};
-		
-		if (lumps.length == 0) return data;
-		
-		data.lumps = new Array();
-		
-		for (lump in this.lumps)
-		{
-			var ldata = lump.toObject();
-			data.lumps.push(ldata);
-		}
-		
-		return data;
-	}
-	
 	override public function toString():String 
 	{
 		return 'Directory ${name} with ${lumps.length} lump(s)';
